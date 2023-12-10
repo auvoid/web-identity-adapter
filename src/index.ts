@@ -27,6 +27,7 @@ import * as WebResolver from "web-did-resolver";
 import { Resolver } from "did-resolver";
 import { Validator } from "jsonschema";
 import { OpenBadgeSchema } from "./ob-schema";
+// @ts-ignore
 import { Ed25519VerificationKey2018 } from "@digitalbazaar/ed25519-verification-key-2018";
 
 export class DidWebAdapter implements NetworkAdapter {

@@ -922,6 +922,7 @@ export const OpenBadgeSchema = {
                     type: "string",
                 },
             },
+            // @ts-ignore
             required: [],
             additionalProperties: true,
         },
