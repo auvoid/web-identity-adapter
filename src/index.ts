@@ -116,6 +116,7 @@ export class DidWebAccount implements IdentityAccount {
         props: IdentityAccountProps<any>
     ): Promise<DidWebAccount> {
         const { seed, store, alias } = props;
+        console.log("seed", seed);
 
         const keyPair = nacl.box.keyPair.fromSecretKey(stringToBytes(seed));
 
@@ -312,6 +313,7 @@ export class DidKeyCredentialsManager<
             type,
             image,
             issuerName,
+            badgeName,
             criteria,
             description,
         } = options;
@@ -355,7 +357,7 @@ export class DidKeyCredentialsManager<
                         criteria: {
                             narrative: criteria,
                         },
-                        name: type,
+                        name: badgeName,
                         description: description,
                         image: {
                             id: image,
