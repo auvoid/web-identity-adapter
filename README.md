@@ -1,19 +1,19 @@
-# DID Key Adapter
+# DID Web Adapter
 
-`did:key` adapter for `@tanglelabs/ssimon`
+`did:web` adapter for `@tanglelabs/ssimon`
 
 ## Installation
 
 ### 1. npm
 
 ```sh
-$ npm install @tanglelabs/ssimon @tanglelabs/key-identity-adapter
+$ npm install @tanglelabs/ssimon @tanglelabs/web-identity-adapter
 ```
 
 ### 2. yarn
 
 ```sh
-$ yarn add @tanglelabs/ssimon @tanglelabs/key-identity-adapter
+$ yarn add @tanglelabs/ssimon @tanglelabs/web-identity-adapter
 ```
 
 ## Usage
@@ -21,12 +21,12 @@ $ yarn add @tanglelabs/ssimon @tanglelabs/key-identity-adapter
 ```ts
 (async () => {
     const manager = await IdentityManager.build({
-        adapter: DidKeyAdapter,
+        adapter: DidWebAdapter,
         storage,
     });
 
     const did = await manager.createDid({
-        alias: "asdf",
+        alias: "domain.com",
         store,
     });
 
@@ -37,5 +37,5 @@ $ yarn add @tanglelabs/ssimon @tanglelabs/key-identity-adapter
 ### Result
 
 ```
-did:key:z6MkgMrYL9gZDeDq9d4ZRQquiE83cuwN6BUzHDVLNz1CpAmG
+did:web:domain.com
 ```

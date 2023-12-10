@@ -59,6 +59,12 @@ export class DidWebAdapter implements NetworkAdapter {
     ): Promise<DidCreationResult> {
         const { seed, alias, store } = props;
 
+        const hostnameRegex = /^(?!:\/\/)([a-zA-Z0-9-]{1,63}\.?)+[a-zA-Z]{2,}$/;
+
+        const validAlias = hostnameRegex.test(alias);
+        if (!validAlias)
+            throw new Error("Alias must be a domain, example `domain.com`");
+
         const generatedKeyPair = nacl.box.keyPair();
         const generatedSeed = bytesToString(generatedKeyPair.secretKey);
         console.log(seed ?? generatedSeed);
