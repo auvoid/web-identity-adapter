@@ -15,8 +15,6 @@ import {
     stringToBytes,
 } from "@tanglelabs/ssimon";
 import nacl from "tweetnacl";
-import { DID } from "dids";
-import { Ed25519Provider } from "key-did-provider-ed25519";
 import {
     JwtCredentialPayload,
     createVerifiableCredentialJwt,
@@ -25,10 +23,11 @@ import {
     verifyCredential,
 } from "did-jwt-vc";
 import * as didJWT from "did-jwt";
-import * as KeyResolver from "key-did-resolver";
+import * as WebResolver from "web-did-resolver";
 import { Resolver } from "did-resolver";
 import { Validator } from "jsonschema";
 import { OpenBadgeSchema } from "./ob-schema";
+import { Ed25519VerificationKey2018 } from "@digitalbazaar/ed25519-verification-key-2018";
 
 export class DidWebAdapter implements NetworkAdapter {
     store: StorageSpec<any, any>;
@@ -109,11 +108,9 @@ export class DidWebAccount implements IdentityAccount {
     public static async build(
         props: IdentityAccountProps<any>
     ): Promise<DidWebAccount> {
-        const { seed, store } = props;
+        const { seed, store, alias } = props;
 
-        console.log(seed);
         const keyPair = nacl.box.keyPair.fromSecretKey(stringToBytes(seed));
-        const provider = new Ed25519Provider(stringToBytes(seed));
 
         const account = new DidWebAccount();
         const credentials = await DidKeyCredentialsManager.build(
@@ -121,12 +118,28 @@ export class DidWebAccount implements IdentityAccount {
             account
         );
         account.keyPair = keyPair;
-        const did = new DID({
-            provider,
-            resolver: KeyResolver.getResolver(),
-        });
-        console.log(await did.());
 
+        const { publicKeyBase58 } = await Ed25519VerificationKey2018.generate({
+            seed: stringToBytes(seed),
+        });
+
+        const didUrl = "did:web:" + alias;
+        const keyUrl = didUrl + "#key-0";
+        const verificationMethod = {
+            id: keyUrl,
+            type: "Ed25519VerificationKey2018",
+            controller: didUrl,
+            publicKeyBase58,
+        };
+
+        account.document = {
+            "@context": ["https://www.w3.org/ns/did/v1"],
+            id: didUrl,
+            verificationMethod: [verificationMethod],
+            authentication: [keyUrl],
+            assertionMethod: [keyUrl],
+            keyAgreement: [keyUrl],
+        };
         account.credentials = credentials;
 
         return account;
@@ -237,8 +250,8 @@ export class DidKeyCredentialsManager<
         credential: Record<string, unknown>
     ): Promise<IVerificationResult> {
         const { cred } = credential;
-        const keyDIDResolver = KeyResolver.getResolver();
-        const didResolver = new Resolver(keyDIDResolver);
+        const webDIDResolver = WebResolver.getResolver();
+        const didResolver = new Resolver(webDIDResolver);
         await verifyCredential(cred as string, didResolver);
         return { vc: true, dvid: true };
     }
@@ -258,10 +271,7 @@ export class DidKeyCredentialsManager<
         const keyUint8Array = stringToBytes(key);
 
         const signer = didJWT.EdDSASigner(keyUint8Array);
-        const didId =
-            this.account.getDid() +
-            "#" +
-            this.account.getDid().split("did:key:")[1];
+        const didId = this.account.getDid() + "#key-0";
         const vcIssuer = {
             did: didId,
             signer,
@@ -305,10 +315,7 @@ export class DidKeyCredentialsManager<
         const keyUint8Array = stringToBytes(key);
 
         const signer = didJWT.EdDSASigner(keyUint8Array);
-        const didId =
-            this.account.getDid() +
-            "#" +
-            this.account.getDid().split("did:key:")[1];
+        const didId = this.account.getDid() + "#key-0";
         const vcIssuer = {
             did: didId,
             signer,

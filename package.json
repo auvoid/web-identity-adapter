@@ -9,16 +9,16 @@
   "license": "MIT",
   "type": "module",
   "dependencies": {
+    "@digitalbazaar/ed25519-verification-key-2018": "^4.0.0",
     "@tanglelabs/ssimon": "^0.5.2",
+    "base58-universal": "^2.0.0",
     "did-jwt": "^7.2.6",
     "did-jwt-vc": "^3.2.6",
     "did-resolver": "^4.1.0",
-    "dids": "^4.0.4",
     "jsonschema": "^1.4.1",
-    "key-did-provider-ed25519": "^3.0.2",
-    "key-did-resolver": "^3.0.0",
     "tweetnacl": "^1.0.3",
-    "tweetnacl-util": "^0.15.1"
+    "tweetnacl-util": "^0.15.1",
+    "web-did-resolver": "^2.0.27"
   },
   "scripts": {
     "dev": "nodemon --watch './**/*.ts' --exec 'node --experimental-specifier-resolution=node --trace-warnings --loader ts-node/esm' src/test.ts",
