@@ -212,6 +212,13 @@ crypto-ld@^7.0.0:
   resolved "https://registry.yarnpkg.com/crypto-ld/-/crypto-ld-7.0.0.tgz#ad593cce31da84e60bd14fd2b25221f97e8a3b74"
   integrity sha512-RrXy6aB0TOhSiqsgavTQt1G8mKomKIaNLb2JZxj7A/Vi0EwmXguuBQoeiAvePfK6bDR3uQbqYnaLLs4irTWwgw==
 
+debug@^4.3.2:
+  version "4.3.4"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.4.tgz#1319f6579357f2338d3337d2cdd4914bb5dcc865"
+  integrity sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==
+  dependencies:
+    ms "2.1.2"
+
 did-jwt-vc@^3.2.6:
   version "3.2.6"
   resolved "https://registry.yarnpkg.com/did-jwt-vc/-/did-jwt-vc-3.2.6.tgz#4e884c29509cac7a3757d495a5eb62c6bae07d26"
@@ -244,6 +251,13 @@ diff@^4.0.1:
   resolved "https://registry.yarnpkg.com/diff/-/diff-4.0.2.tgz#60f3aecb89d5fae520c11aa19efc2bb982aade7d"
   integrity sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==
 
+fix-esm-import-path@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/fix-esm-import-path/-/fix-esm-import-path-1.5.0.tgz#40f33122b383a9136b426f841ddcf5107b5acd66"
+  integrity sha512-GZRlEDW2rRfz1bQrEMrGhkEfnkfgH1ryBYV2WJGDFhj7KH3C7iwUWuja3Q+tO4ungBmufLHPPGI3VINCqgQDdw==
+  dependencies:
+    debug "^4.3.2"
+
 jsonschema@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/jsonschema/-/jsonschema-1.4.1.tgz#cc4c3f0077fb4542982973d8a083b6b34f482dab"
@@ -253,6 +267,11 @@ make-error@^1.1.1:
   version "1.3.6"
   resolved "https://registry.yarnpkg.com/make-error/-/make-error-1.3.6.tgz#2eb2e37ea9b67c4891f684a1394799af484cf7a2"
   integrity sha512-s8UhlNe7vPKomQhC1qFelMokr/Sc3AgNbso3n74mVPA5LTZwkB9NlXf4XPamLxJE8h0gh73rM94xvwRT2CVInw==
+
+ms@2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
+  integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
 multiformats@^12.0.0, multiformats@^12.0.1:
   version "12.1.0"
