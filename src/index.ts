@@ -68,7 +68,6 @@ export class DidWebAdapter implements NetworkAdapter {
 
         const generatedKeyPair = nacl.box.keyPair();
         const generatedSeed = bytesToString(generatedKeyPair.secretKey);
-        console.log(seed ?? generatedSeed);
 
         const identity = await DidWebAccount.build({
             seed: seed ?? generatedSeed,
@@ -116,7 +115,6 @@ export class DidWebAccount implements IdentityAccount {
         props: IdentityAccountProps<any>
     ): Promise<DidWebAccount> {
         const { seed, store, alias } = props;
-        console.log("seed", seed);
 
         const keyPair = nacl.box.keyPair.fromSecretKey(stringToBytes(seed));
 
