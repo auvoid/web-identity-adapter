@@ -215,6 +215,12 @@ export class DidKeyCredentialsManager<
     account: DidWebAccount;
 
     private constructor() {}
+    revokeByIndex(keyIndex: number): Promise<void> {
+        throw new Error("Method not implemented.");
+    }
+    revokeCredential(credential: Record<string, any>): Promise<void> {
+        throw new Error("Method not implemented.");
+    }
 
     /**
      * Create a new instance o DidKeyCredentialsManager
@@ -298,6 +304,7 @@ export class DidKeyCredentialsManager<
                 },
             },
         };
+        if (options.expiryDate) credential.exp = options.expiryDate;
         const jwt = await createVerifiableCredentialJwt(credential, vcIssuer);
 
         return { cred: jwt };
@@ -366,6 +373,8 @@ export class DidKeyCredentialsManager<
                 },
             },
         };
+
+        if (options.expiryDate) credential.exp = options.expiryDate;
 
         const validator = new Validator();
         const result = validator.validate(credential.vc, OpenBadgeSchema);
