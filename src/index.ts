@@ -299,6 +299,7 @@ export class DidKeyCredentialsManager<
                 "@context": ["https://www.w3.org/2018/credentials/v1"],
                 type: ["VerifiableCredential", ...types],
                 id,
+                ...options.extras,
                 credentialSubject: {
                     ...body,
                 },
