@@ -337,6 +337,7 @@ export class DidKeyCredentialsManager<
             alg: "EdDSA",
         };
         const types = Array.isArray(type) ? [...type] : [type];
+        const extras = options.extras ?? {};
         const credential: JwtCredentialPayload = {
             sub: recipientDid,
             nbf: Math.floor(Date.now() / 1000),
@@ -348,6 +349,7 @@ export class DidKeyCredentialsManager<
                 ],
                 type: ["VerifiableCredential", "OpenBadgeCredential"],
                 id,
+                ...extras,
                 name: type,
                 issuer: {
                     id: new URL("/", id).toString(),

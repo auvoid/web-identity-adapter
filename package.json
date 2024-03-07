@@ -1,6 +1,6 @@
 {
   "name": "@tanglelabs/web-identity-adapter",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "did:web adapter",
   "main": "dist/index.js",
   "types": "dist/index.d.js",
