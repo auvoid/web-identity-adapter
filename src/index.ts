@@ -49,6 +49,10 @@ export class DidWebAdapter implements NetworkAdapter {
         return adapter;
     }
 
+    getMethodIdentifier() {
+        return "web";
+    }
+
     /**
      * Create a new DID and store in the store defined with the adapter
      *
@@ -283,9 +287,8 @@ export class DidKeyCredentialsManager<
         const keyUint8Array = stringToBytes(key);
 
         const signer = didJWT.EdDSASigner(keyUint8Array);
-        const didId = this.account.getDid() + "#key-0";
         const vcIssuer = {
-            did: didId,
+            did: this.account.getDid(),
             signer,
             alg: "EdDSA",
         };
@@ -386,9 +389,5 @@ export class DidKeyCredentialsManager<
         const jwt = await createVerifiableCredentialJwt(credential, vcIssuer);
 
         return { cred: jwt };
-    }
-
-    revoke(keyIndex: number): Promise<void> {
-        throw new Error("Method not implemented.");
     }
 }
